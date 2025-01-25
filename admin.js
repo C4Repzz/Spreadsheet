@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch items from the getItems function when the page loads
   async function fetchItems() {
     try {
-      const response = await fetch('/functions/getItems.js');
+      const response = await fetch('/functions/getItems.js'); // Assuming you want to fetch JSON from here
       const items = await response.json();
       items.forEach(addItemToList); // Add each item to the list
     } catch (error) {
@@ -21,17 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
   addItemForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-const item = {
-  name: addItemForm.name.value,
-  price: addItemForm.price.value,
-  link: addItemForm.link.value,
-  imageLink: addItemForm.imageLink.value,
-  qcLink: addItemForm.qcLink.value,
-  category: addItemForm.category.value === "custom" ? addItemForm.customCategory.value : addItemForm.category.value,
-};
+    const item = {
+      name: addItemForm.name.value,
+      price: addItemForm.price.value,
+      link: addItemForm.link.value,
+      imageLink: addItemForm.imageLink.value,
+      qcLink: addItemForm.qcLink.value,
+      category: addItemForm.category.value === "custom" ? addItemForm.customCategory.value : addItemForm.category.value,
+    };
 
-
-    // Send the new item to the backend (Netlify function)
     try {
       const response = await fetch('/functions/addItem', {
         method: 'POST',
@@ -42,8 +40,8 @@ const item = {
       });
 
       if (response.ok) {
-        addItemToList(item); // Add the item to the list on success
-        addItemForm.reset();
+        addItemToList(item); // This will add the new item to the list
+        addItemForm.reset(); // Reset the form
       } else {
         alert('Failed to add item');
       }
@@ -86,7 +84,7 @@ const item = {
     editItemForm.qcLink.value = item.qcLink || "";
     editItemForm.category.value = item.category;
 
-    // Attach the submit handler
+    // Ensure the form is properly attached and prevent it from reattaching
     editItemForm.onsubmit = async (e) => {
       e.preventDefault();
 
@@ -99,7 +97,6 @@ const item = {
         category: editItemForm.category.value,
       };
 
-      // Send the updated item to the backend
       try {
         const response = await fetch('/functions/updateItem', {
           method: 'POST',
@@ -125,7 +122,6 @@ const item = {
             openEditModal(updatedItem, itemElement);
           });
 
-          // Close the modal after updating
           editItemModal.style.display = "none"; 
         } else {
           alert('Failed to update item');
@@ -142,4 +138,3 @@ const item = {
     editItemModal.style.display = "none";
   });
 });
-
