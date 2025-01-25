@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch items from the getItems function when the page loads
   async function fetchItems() {
     try {
-      const response = await fetch('/functions/getItems');
+      const response = await fetch('/functions/getItems.js');
       const items = await response.json();
       items.forEach(addItemToList); // Add each item to the list
     } catch (error) {
