@@ -1,90 +1,75 @@
-// Function to display all clothing items
-function displayItems(items) {
-  const clothesList = document.getElementById("clothes-list");
-  clothesList.innerHTML = ''; // Clear previous list of items
+// Add item to the list
+async function addItemToList(event) {
+  event.preventDefault(); // Prevent form from reloading the page
 
-  items.forEach((item) => {
-    const clothingItem = document.createElement("div");
-    clothingItem.classList.add("clothing-item");
+  // Collect form data
+  const newItem = {
+    name: document.getElementById('name').value,
+    price: document.getElementById('price').value,
+    imageLink: document.getElementById('image-link').value,
+    category: document.getElementById('category').value === 'custom' 
+              ? document.getElementById('custom-category').value 
+              : document.getElementById('category').value,
+    qcLink: document.getElementById('qc-link').value || null,
+  };
 
-    const anchorTag = document.createElement("a");
-    anchorTag.href = item.link;
-    anchorTag.target = "_blank"; 
-    clothingItem.appendChild(anchorTag);
+  // Send POST request to Netlify function to add the item
+  try {
+    const response = await fetch('/.netlify/functions/addItem', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newItem),
+    });
 
-    const img = document.createElement("img");
-    img.src = item.image;
-    img.alt = item.name;
-    anchorTag.appendChild(img);
-
-    const detailsDiv = document.createElement("div");
-    detailsDiv.classList.add("item-details");
-
-    const namePara = document.createElement("p");
-    namePara.textContent = item.name;
-    detailsDiv.appendChild(namePara);
-
-    const pricePara = document.createElement("p");
-    pricePara.innerHTML = `<span>$${item.price}</span>`;
-    detailsDiv.appendChild(pricePara);
-
-    // Check if item.qcLink exists, and add it or display a placeholder message
-    if (item.qcLink && item.qcLink.trim() !== "") {
-      const qcLink = document.createElement("a");
-      qcLink.href = item.qcLink; 
-      qcLink.textContent = "QC";
-      qcLink.classList.add("qc-link"); 
-      detailsDiv.appendChild(qcLink);
+    if (response.ok) {
+      alert('Item added successfully!');
+      // Optionally reload or update the list after adding an item
+      loadItems();
+      document.getElementById('add-item-form').reset(); // Reset the form
     } else {
-      // Optional: Show a message if no QC link is available
-      const noQcLink = document.createElement("span");
-      noQcLink.textContent = "No QC available";  // Placeholder message
-      noQcLink.classList.add("no-qc-link");
-      detailsDiv.appendChild(noQcLink);
+      alert('Failed to add item');
     }
-
-    anchorTag.appendChild(detailsDiv);
-    clothesList.appendChild(clothingItem);
-  });
-}
-
-// Function to filter items based on category
-function filterCategory(category) {
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  let filteredProducts;
-
-  if (category === '') {
-    filteredProducts = products;
-  } else {
-    filteredProducts = products.filter(product => product.category === category);
-  }
-
-  displayItems(filteredProducts);
-}
-
-// Function to check the zoom level and show/hide the brand text
-function checkZoomLevel() {
-  const brandText = document.querySelector('.brand-text');
-
-  // Get the current zoom level by comparing the window's inner width to the document's width
-  const zoomLevel = window.innerWidth / document.documentElement.clientWidth * 100;
-
-  if (zoomLevel <= 115) {
-    // Hide the brand text if zoom level is 115% or lower
-    brandText.style.display = 'none';
-  } else {
-    // Show the brand text if zoom level is above 115%
-    brandText.style.display = 'block';
+  } catch (error) {
+    alert('Error: ' + error.message);
   }
 }
 
-// Call the function on window resize or zoom change
-window.addEventListener('resize', checkZoomLevel);
-window.addEventListener('load', checkZoomLevel); // Also call on initial load
+// Load all items from data
+async function loadItems() {
+  try {
+    const response = await fetch('/.netlify/functions/getItems');
+    const items = await response.json();
 
+    const itemsContainer = document.getElementById('admin-list');
+    itemsContainer.innerHTML = ''; // Clear previous items
+    items.forEach(item => {
+      const itemElement = document.createElement('div');
+      itemElement.classList.add('clothing-item');
+      itemElement.innerHTML = `
+        <img src="${item.imageLink}" alt="${item.name}" />
+        <div class="item-details">
+          <h3>${item.name}</h3>
+          <p>Price: $${item.price}</p>
+          <p>Category: ${item.category}</p>
+          <a href="${item.qcLink}" target="_blank">View QC Link</a>
+          <button onclick="editItem('${item.name}')">Edit</button>
+        </div>
+      `;
+      itemsContainer.appendChild(itemElement);
+    });
+  } catch (error) {
+    alert('Error loading items: ' + error.message);
+  }
+}
 
-// Load and display all items on page load
-document.addEventListener("DOMContentLoaded", function () {
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  displayItems(products);
-});
+// Function to open the Edit modal and populate the fields (not fully implemented)
+function editItem(itemName) {
+  // Find the item based on the name (or ID) and populate the edit form fields.
+  // This can be expanded to include functionality to edit items.
+  alert(`Edit functionality for ${itemName} is not fully implemented yet.`);
+}
+
+// Call loadItems on page load to display existing items
+window.onload = loadItems;
