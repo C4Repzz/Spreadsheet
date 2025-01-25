@@ -25,7 +25,7 @@ function displayItems(items) {
     detailsDiv.appendChild(namePara);
 
     const pricePara = document.createElement("p");
-    pricePara.innerHTML = <span>$${item.price}</span>;
+    pricePara.innerHTML = `<span>$${item.price}</span>`;
     detailsDiv.appendChild(pricePara);
 
     // Check if item.qcLink exists, and add it or display a placeholder message
