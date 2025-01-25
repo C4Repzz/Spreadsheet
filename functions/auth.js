@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
   const auth = headers['authorization'];
 
   // Check if the authorization header exists and matches the expected credentials
-  if (!auth || auth !== 'Basic ' + Buffer.from('username:password').toString('base64')) {
+  if (!auth || auth !== 'Basic ' + Buffer.from('Hasse:$apr1$air852dn$3NNFaM7tkxPSP2YONre6r0').toString('base64')) {
     return {
       statusCode: 401,
       headers: {
