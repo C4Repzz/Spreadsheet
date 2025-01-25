@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch items from the getItems function when the page loads
   async function fetchItems() {
     try {
-      const response = await fetch('/functions/getItems.js');
+      const response = await fetch('/functions/getItems');
       const items = await response.json();
-      items.forEach(addItemToList);
+      items.forEach(addItemToList); // Add each item to the list
     } catch (error) {
       console.error('Error fetching items:', error);
     }
@@ -77,18 +77,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Open Edit Modal
   function openEditModal(item, itemElement) {
+    // Ensure the modal is visible
     editItemModal.style.display = "block";
     editItemForm.name.value = item.name;
     editItemForm.price.value = item.price;
     editItemForm.link.value = item.link;
     editItemForm.imageLink.value = item.imageLink;
-    editItemForm.qcLink.value = item.qcLink;
+    editItemForm.qcLink.value = item.qcLink || "";
     editItemForm.category.value = item.category;
 
-    // Handle the form submission to update the item
+    // Ensure that we attach the submit handler only once
     editItemForm.onsubmit = async (e) => {
       e.preventDefault();
 
+      // Capture the form data
       const updatedItem = {
         name: editItemForm.name.value,
         price: editItemForm.price.value,
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Send the updated item to the backend
       try {
-        const response = await fetch('/.netlify/functions/updateItem', {
+        const response = await fetch('/functions/updateItem', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -124,7 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
             openEditModal(updatedItem, itemElement);
           });
 
-          editItemModal.style.display = "none"; // Close the modal after updating
+          // Close the modal after updating
+          editItemModal.style.display = "none"; 
         } else {
           alert('Failed to update item');
         }
