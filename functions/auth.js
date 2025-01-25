@@ -1,25 +1,44 @@
-// functions/Auth.js
+// functions/auth.js
 
-const { parse } = require('querystring');
+const { Buffer } = require('buffer');
 
 exports.handler = async (event, context) => {
-  const { headers } = event;
-  const auth = headers['authorization'];
-
-  // Check if the authorization header exists and matches the expected credentials
-  if (!auth || auth !== 'Basic ' + Buffer.from('Hasse:$apr1$air852dn$3NNFaM7tkxPSP2YONre6r0').toString('base64')) {
+  const authHeader = event.headers.authorization;
+  
+  // Define username and password directly in the code
+  const username = 'Hasse';
+  const passwordHash = '$2y$10$9n5Oeeul2IMWoSHRkIQ77ewJCjklGSb7ymnuwGBFwyCYiqfYO23eq'; // bcrypt hash of the password
+  
+  // If the Authorization header is missing or doesn't start with 'Basic ', send a 401 response
+  if (!authHeader || !authHeader.startsWith('Basic ')) {
     return {
       statusCode: 401,
       headers: {
-        'WWW-Authenticate': 'Basic realm="Restricted Area"',
+        'WWW-Authenticate': 'Basic realm="Restricted Area"'
       },
-      body: 'Unauthorized',
+      body: 'Unauthorized'
     };
   }
 
-  // If authorized, continue with the request
+  // Decode the base64-encoded credentials
+  const encodedCredentials = authHeader.split(' ')[1];
+  const decodedCredentials = Buffer.from(encodedCredentials, 'base64').toString('utf-8');
+  const [enteredUsername, enteredPassword] = decodedCredentials.split(':');
+
+  // Compare entered credentials with the expected ones
+  if (enteredUsername === username && enteredPassword === passwordHash) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'Authorized' })
+    };
+  }
+
+  // If the credentials don't match, send a 401 response
   return {
-    statusCode: 200,
-    body: JSON.stringify({ message: 'Authorized' }),
+    statusCode: 401,
+    headers: {
+      'WWW-Authenticate': 'Basic realm="Restricted Area"'
+    },
+    body: 'Unauthorized'
   };
 };
