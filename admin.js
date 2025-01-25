@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminList = document.getElementById("admin-list");
   const editItemModal = document.getElementById("edit-item-modal");
   const editItemForm = document.getElementById("edit-item-form");
+  const cancelEditButton = document.getElementById("cancel-edit-btn");
 
-  // Fetch items from the getItems function when the page loads
+  // Fetch items from the backend (Netlify function)
   async function fetchItems() {
     try {
       const response = await fetch('/functions/getItems');
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     itemElement.innerHTML = `
       <p>Name: ${item.name}</p>
-      <p>Price: ${item.price}</p>
+      <p>Price: $${item.price}</p>
       <p><a href="${item.link}" target="_blank">Product Link</a></p>
       <img src="${item.imageLink}" alt="${item.name}" style="max-width: 100px;">
       <p>QC Link: ${item.qcLink || "N/A"}</p>
@@ -95,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       item.qcLink = editItemForm.qcLink.value;
       item.category = editItemForm.category.value;
 
-      // Update item on the backend (if needed)
+      // Send the updated item to the backend (Netlify function)
       try {
         const response = await fetch('/functions/updateItem', { // Assuming you have an 'updateItem' function
           method: 'POST',
@@ -109,13 +110,35 @@ document.addEventListener("DOMContentLoaded", () => {
           // Update the item in the list
           itemElement.innerHTML = `
             <p>Name: ${item.name}</p>
-            <p>Price: ${item.price}</p>
+            <p>Price: $${item.price}</p>
             <p><a href="${item.link}" target="_blank">Product Link</a></p>
             <img src="${item.imageLink}" alt="${item.name}" style="max-width: 100px;">
             <p>QC Link: ${item.qcLink || "N/A"}</p>
             <p>Category: ${item.category}</p>
             <button class="edit-btn">Edit</button>
           `;
+
+          itemElement.querySelector(".edit-btn").addEventListener("click", () => {
+            openEditModal(item, itemElement);
+          });
+
+          editItemModal.style.display = "none";
+        } else {
+          alert('Failed to update item');
+        }
+      } catch (error) {
+        console.error('Error updating item:', error);
+        alert('Error updating item');
+      }
+    };
+  }
+
+  // Close Edit Modal
+  cancelEditButton.addEventListener("click", () => {
+    editItemModal.style.display = "none";
+  });
+});
+
 
           itemElement.querySelector(".edit-btn").addEventListener("click", () => {
             openEditModal(item, itemElement);
