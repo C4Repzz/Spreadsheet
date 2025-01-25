@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch('/functions/addItem', {
+      const response = await fetch('/functions/addItem.js', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        const response = await fetch('/functions/updateItem', {
+        const response = await fetch('/functions/updateItem.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
