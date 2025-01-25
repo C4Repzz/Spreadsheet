@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Send the new item to the backend (Netlify function)
     try {
-      const response = await fetch('/functions/addItem', {
+      const response = await fetch('/functions/addItem.js', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
