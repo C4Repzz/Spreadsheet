@@ -9,21 +9,10 @@
 </head>
 <body>
   <div class="container">
-    <!-- Login Section -->
-    <div id="login-section">
-      <h1>Admin Login</h1>
-      <form id="login-form">
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
-      <p id="login-error" style="color: red; display: none;">Invalid login credentials. Please try again.</p>
-    </div>
-
-    <!-- Admin Panel (hidden by default) -->
-    <div id="admin-panel" style="display: none;">
+    <!-- Admin Panel -->
+    <div id="admin-panel">
       <h1>Admin Panel</h1>
-      
+
       <!-- Add Item Form -->
       <form id="add-item-form">
         <input type="text" id="name" placeholder="Item Name" required>
@@ -46,7 +35,7 @@
           <option value="custom">Custom</option>
         </select>
 
-        <!-- Custom Category Input (hidden by default) -->
+        <!-- Custom Category -->
         <input type="text" id="custom-category" name="category" style="display:none;" placeholder="Enter custom category">
         
         <button type="submit">Add Item</button>
@@ -54,14 +43,11 @@
 
       <!-- List of Items -->
       <div id="admin-list" class="clothes-list"></div>
-
-      <!-- Logout Button -->
-      <button id="logout-btn">Logout</button>
     </div>
   </div>
 
   <!-- Edit Item Modal -->
-  <div id="edit-item-modal" class="modal">
+  <div id="edit-item-modal" class="modal" style="display: none;">
     <div class="modal-content">
       <h2>Edit Item</h2>
       <form id="edit-item-form">
@@ -84,7 +70,7 @@
           <option value="custom">Custom</option>
         </select>
 
-        <!-- Custom Category Input (hidden by default) -->
+        <!-- Custom Category -->
         <input type="text" id="edit-custom-category" name="category" style="display:none;" placeholder="Enter custom category">
 
         <input type="text" id="edit-qc-link" placeholder="QC Link (optional)" />
@@ -96,12 +82,5 @@
       </form>
     </div>
   </div>
-
-  <!-- Firebase SDKs -->
-  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-
-
 </body>
 </html>
