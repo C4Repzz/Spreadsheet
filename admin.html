@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Panel</h1>
+    
+    <!-- Add Item Form -->
+    <form id="add-item-form">
+      <input type="text" id="name" placeholder="Item Name" required>
+      <input type="number" id="price" placeholder="Price" required>
+      <input type="text" id="link" placeholder="Product Link" required>
+      <input type="text" id="image-link" placeholder="Image Link" required>
+      <input type="text" id="qc-link" placeholder="QC Link (optional)">
+      
+      <label for="category">Category</label>
+      <select id="category" name="category">
+        <option value="">Select a Category</option>
+        <option value="Shoes">Shoes</option>
+        <option value="Hoodies">Hoodies/Sweaters</option>
+        <option value="T-Shirts">T-Shirts</option>
+        <option value="Jackets">Jackets</option>
+        <option value="Pants">Pants/Shorts</option>
+        <option value="Headwear">Headwear</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Other">Other Stuff</option>
+        <option value="custom">Custom</option>
+      </select>
+      
+      
+      <!-- Custom Category Input (hidden by default) -->
+      <input type="text" id="custom-category" name="category" style="display:none;" placeholder="Enter custom category">
+      
+      <button type="submit">Add Item</button>
+    </form>
+
+    <!-- List of Items -->
+    <div id="admin-list" class="clothes-list"></div>
+  </div>
+
+  <!-- Edit Item Modal -->
+  <div id="edit-item-modal" class="modal">
+    <div class="modal-content">
+      <h2>Edit Item</h2>
+      <form id="edit-item-form">
+        <input type="text" id="edit-name" placeholder="Item Name" required />
+        <input type="number" id="edit-price" placeholder="Price" required />
+        <input type="text" id="edit-link" placeholder="Product Link" required />
+        <input type="text" id="edit-image-link" placeholder="Image Link" required />
+
+        <label for="edit-category">Category</label>
+        <select id="edit-category" name="category">
+          <option value="">Select a Category</option>
+          <option value="Shoes">Shoes</option>
+          <option value="Hoodies">Hoodies/Sweaters</option>
+          <option value="T-Shirts">T-Shirts</option>
+          <option value="Jackets">Jackets</option>
+          <option value="Pants">Pants/Shorts</option>
+          <option value="Headwear">Headwear</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Other">Other Stuff</option>
+          <option value="custom">Custom</option>
+        </select>
+        
+        </select>
+
+        <!-- Custom Category Input (hidden by default) -->
+        <input type="text" id="edit-custom-category" name="category" style="display:none;" placeholder="Enter custom category">
+
+        <input type="text" id="edit-qc-link" placeholder="QC Link (optional)" />
+
+        <div class="modal-buttons">
+          <button type="button" id="cancel-edit-btn" class="cancel-btn">Cancel</button>
+          <button type="submit" id="save-edit-btn" class="save-btn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #3f0303; /* Dark background for the page */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  color: white;
+}
+
+/* Home button shadow effect */
+.home-btn {
+  position: relative;
+  font-size: 20px;
+  background-color: #ff3333; /* Red background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+  background-color: #e60000;
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 1); /* Stronger red shadow on hover */
+}
+
+/* Register Section Styles */
+.register-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Register Link Text */
+.register-link {
+  color: #ff3333; /* Red */
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #ff6666; /* Lighter red on hover */
+}
+
+/* Discord Button */
+.discord-button {
+  margin-top: 20px;
+  background-color: #7289da; /* Discord blue */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px; /* Rounded edges for the button */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.discord-button:hover {
+  background-color: #5d6fa4;
+}
+
+.discord-button i {
+  font-size: 22px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #3c0a0a; /* Dark red background for the header */
+  padding: 10px 0;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+}
+
+/* General Category Button Styles */
+.categories button {
+  background-color: #ff3333; /* Bright red for category button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative; /* To allow glow effect */
+}
+
+/* Hover effect - Glow more (red theme) */
+.categories button:hover {
+  background-color: #ff4d4d; /* Brighter red on hover */
+  box-shadow: 0 0 15px 5px rgba(255, 77, 77, 0.8); /* Red glow on hover */
+}
+
+/* Active category glow effect (red theme) */
+.categories button.active {
+  background-color: #ff4d4d; /* Keep it bright red when active */
+  box-shadow: 0 0 25px 5px rgba(255, 77, 77, 1); /* Stronger red glow for active button */
+}
+
+/* Subtle red glow effect for buttons when not hovered but active */
+.categories button.active:not(:hover) {
+  box-shadow: 0 0 10px 3px rgba(255, 77, 77, 0.5); /* Subtle red glow when active */
+}
+
+/* Container */
+.container {
+  margin-top: 60px;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Clothing List */
+.clothes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+/* Clothing Item */
+.clothing-item {
+  background-color: #b33c3c; /* Red background for the item */
+  width: 220px;
+  border-radius: 15px; /* Rounded edges for the clothing items */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  font-weight: bold; /* Bold font for the item text */
+  text-align: center;
+}
+
+.clothing-item:hover {
+  transform: scale(1.05); /* Scale on hover */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Add a shadow */
+  background-color: #cc4d4d; /* Lighter red on hover */
+}
+
+.clothing-item a {
+  text-decoration: none;
+  color: white; /* Keep text white when the item is clicked */
+}
+
+/* Image styling */
+.clothing-item img {
+  width: 100%;
+  height: 150px;
+  border-radius: 15px 15px 0 0; /* Rounded top corners */
+  object-fit: cover;
+}
+
+/* Name and Price styling */
+.clothing-item .item-details {
+  padding: 12px;
+  text-align: center;
+  margin-top: auto;
+  color: #fff; /* White color for text inside items */
+}
+
+.clothing-item .item-details p {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adding shadow to the text */
+}
+
+.clothing-item .item-details span {
+  color: #ffffff; /* Lighter red for price text */
+  font-weight: bold;
+  font-size: 16px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Black shadow for the price */
+}
+
+/* Admin Panel Styles */
+
+/* Button container for admin page */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #b33c3c; /* Red background */
+  border-bottom: 1px solid #d32f2f;
+}
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Background color */
+  padding-top: 60px; /* Spacing from the top */
+}
+
+/* Modal Content (the box) */
+.modal-content {
+  background-color: #b33c3c; /* Red background */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #d32f2f; /* Darker red border */
+  width: 80%; /* Width of the modal */
+  max-width: 600px;
+  border-radius: 15px; /* Rounded corners */
+  text-align: center;
+  color: white;
+}
+
+/* Modal Input Fields */
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+}
+
+/* Modal Buttons (Cancel & Save) */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-btn, .save-btn {
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn {
+  background-color: #ff3333; /* Red for cancel button */
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #cc0000;
+}
+
+.save-btn {
+  background-color: #4CAF50; /* Green for save button */
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.qc-link {
+  color: #000; /* Default color for the QC link */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.qc-link:hover {
+  color: blue; /* Blue color on hover */
+}
+
+/* Ensure no scaling or unexpected behavior for the body or HTML */
+/* Ensure no scaling or unexpected behavior for the body or HTML */
+/* Ensure no scaling or unexpected behavior for the body or HTML */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+/* Default settings for the brand text */
+.brand-text {
+  position: fixed; /* Fixes the position relative to the viewport */
+  top: 20px; /* Adjust the distance from the top */
+  left: 20px; /* Adjust the distance from the left */
+  font-size: 36px; /* Adjust the font size */
+  font-weight: bold;
+  color: white; /* Text color */
+  text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red, 0 0 40px red; /* Red glowing shadow */
+  z-index: 1000; /* Ensures it's on top of other elements */
+  display: block; /* Default to showing the text */
+}
+
+
+
+
+
+
+/* Button styles */
+.remove-btn {
+  background-color: #ff0000; /* Red for remove button */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.edit-btn {
+  background-color: #ff4444; /* Red for edit button */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.add-btn {
+  background-color: #ff6666; /* Red for add button */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Admin Form */
+#add-item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#add-item-form input,
+#add-item-form select,
+#add-item-form button {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#add-item-form button {
+  background-color: #ff3333; /* Red for the button */
+  color: white;
+  font-weight: bold;
+}
+
+#add-item-form button:hover {
+  background-color: #e60000; /* Darker red on hover */
+}

@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Nike Air Max",
+      "image": "https://via.placeholder.com/250",
+      "price": "120",
+      "link": "https://example.com/nike-air-max",
+      "category": "Shoes"
+    },
+    {
+      "name": "Cool Hoodie",
+      "image": "https://via.placeholder.com/250",
+      "price": "60",
+      "link": "https://example.com/cool-hoodie",
+      "category": "Hoodies"
+    }
+  ]
+  

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C4Repzz Spreadsheet</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:,"> <!-- Suppress favicon error -->
+  <!-- Add FontAwesome CDN for Discord icon -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="categories">
+      <button onclick="filterCategory('home')" class="home-btn">Home</button>
+      <button onclick="filterCategory('')">All Items</button>
+      <button onclick="filterCategory('Shoes')">Shoes</button>
+      <button onclick="filterCategory('Hoodies')">Hoodies/Sweaters</button>
+      <button onclick="filterCategory('T-Shirts')">T-Shirts</button>
+      <button onclick="filterCategory('Jackets')">Jackets</button>
+      <button onclick="filterCategory('Pants')">Pants/Shorts</button>
+      <button onclick="filterCategory('Headwear')">Headwear</button>
+      <button onclick="filterCategory('Accessories')">Accessories</button>
+      <button onclick="filterCategory('Other')">Other Stuff</button>
+    </div>
+  </header>
+  <div class="brand-text">C4Repzz</div>
+  <div class="container">
+    <h1>C4Repzz Spreadsheet</h1>
+
+    <div class="register-section">
+      <p><a href="https://cnfans.com/register/?ref=2384596" class="register-link">Register and get a $150 coupon</a></p>
+
+      <a href="https://discord.com/invite/your-discord-invite-link" target="_blank">
+        <button class="discord-button">
+          <i class="fab fa-discord"></i> 
+        </button>
+      </a>
+    </div>
+
+    <div id="clothes-list" class="clothes-list"></div>
+  </div>
+
+  <!-- Ensure the script is loaded here -->
+  <script src="script.js"></script>
+</body>
+</html>
