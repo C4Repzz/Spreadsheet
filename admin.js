@@ -1,4 +1,29 @@
+// Firebase initialization
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+
+// Your Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyAMLRMkZ3QARVCgz4de7u2Pu_g2bAEZJtA",
+  authDomain: "repzz-a1538.firebaseapp.com",
+  projectId: "repzz-a1538",
+  storageBucket: "repzz-a1538.appspot.com",
+  messagingSenderId: "296738706173",
+  appId: "1:296738706173:web:5ddb076677e7d7f8d62494",
+  measurementId: "G-N567VPRWXQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 document.addEventListener('DOMContentLoaded', function () {
+  const loginForm = document.getElementById('login-form');
+  const adminPanel = document.getElementById('admin-panel');
+  const loginError = document.getElementById('login-error');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const logoutBtn = document.getElementById('logout-btn');
   const adminList = document.getElementById('admin-list');
   const addItemForm = document.getElementById('add-item-form');
   const editItemForm = document.getElementById('edit-item-form');
@@ -157,6 +182,53 @@ document.addEventListener('DOMContentLoaded', function () {
     editModal.style.display = 'none';
   };
 
-  // Initial rendering of products
-  renderAdminProducts();
+  // Handle form submission for login
+  loginForm.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      // If successful, show admin panel and hide login form
+      loginForm.style.display = 'none';
+      adminPanel.style.display = 'block';
+      
+      console.log("User logged in:", user);
+    } catch (error) {
+      console.error("Error logging in:", error);
+      loginError.style.display = 'block'; // Show error message
+    }
+  };
+
+  // Handle logout
+  logoutBtn.onclick = async () => {
+    await signOut(auth);
+    console.log('User logged out');
+    loginForm.style.display = 'block';
+    adminPanel.style.display = 'none';
+  };
+
+  // Handle auth state change (e.g., user logging out)
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is logged in, show the admin panel
+      loginForm.style.display = 'none';
+      adminPanel.style.display = 'block';
+    } else {
+      // No user is logged in, show the login form
+      loginForm.style.display = 'block';
+      adminPanel.style.display = 'none';
+    }
+  });
+
+  // Initial rendering of products (only if user is authenticated)
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      renderAdminProducts();
+    }
+  });
 });
