@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Send the new item to the backend (Netlify function)
     try {
-      const response = await fetch('/functions/addItem.js', {
+      const response = await fetch('/functions/addItem', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Open Edit Modal
   function openEditModal(item, itemElement) {
-    // Ensure the modal is visible
     editItemModal.style.display = "block";
     editItemForm.name.value = item.name;
     editItemForm.price.value = item.price;
@@ -86,11 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
     editItemForm.qcLink.value = item.qcLink || "";
     editItemForm.category.value = item.category;
 
-    // Ensure that we attach the submit handler only once
+    // Attach the submit handler
     editItemForm.onsubmit = async (e) => {
       e.preventDefault();
 
-      // Capture the form data
       const updatedItem = {
         name: editItemForm.name.value,
         price: editItemForm.price.value,
@@ -143,3 +141,4 @@ document.addEventListener("DOMContentLoaded", () => {
     editItemModal.style.display = "none";
   });
 });
+
