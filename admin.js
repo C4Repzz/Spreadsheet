@@ -21,14 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
   addItemForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const item = {
-      name: addItemForm.name.value,
-      price: addItemForm.price.value,
-      link: addItemForm.link.value,
-      imageLink: addItemForm.imageLink.value,
-      qcLink: addItemForm.qcLink.value,
-      category: addItemForm.category.value === "custom" ? addItemForm.customCategory.value : addItemForm.category.value,
-    };
+const item = {
+  name: addItemForm.name.value,
+  price: addItemForm.price.value,
+  link: addItemForm.link.value,
+  imageLink: addItemForm.imageLink.value,
+  qcLink: addItemForm.qcLink.value,
+  category: addItemForm.category.value === "custom" ? addItemForm.customCategory.value : addItemForm.category.value,
+};
+
 
     // Send the new item to the backend (Netlify function)
     try {
