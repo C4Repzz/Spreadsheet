@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/admin.html"
+  to = "/.netlify/functions/auth"
+  status = 200
+  force = true
